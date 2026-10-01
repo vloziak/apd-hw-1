@@ -118,5 +118,46 @@ final class StudyPlannerVictoriaTests: XCTestCase {
         XCTAssertEqual(plan, afterFirst)
         XCTAssertEqual(plan.incompleteMinutes(), 20)
     }
+    
+    // testing bonus task
+    func testImportReplacesExistingInPlaceAndAppendsNewSortedByID() throws {
+        var plan = try StudyPlan(items: [
+            try makeItem("b", title: "Alpha"),
+            try makeItem("a", title: "Beta")
+        ])
+        
+        try plan.importMerging([
+            try makeItem("z", title: "New Z"),
+            try makeItem("a", title: "Beta v2", minutes: 99),
+            try makeItem("c", title: "New C")
+        ])
+        
+        XCTAssertEqual(plan.items.map(\.id), ["b", "a", "c", "z"])
+        XCTAssertEqual(plan.items[1].title, "Beta v2")
+        XCTAssertEqual(plan.items[1].estimatedMinutes, 99)
+    }
+    
+    func testImportWithDuplicateIncomingIDsThrowsAndKeepsPlan() throws {
+        var plan = try StudyPlan(items: [try makeItem("a", title: "Original")])
+        let before = plan
+        
+        XCTAssertThrowsError(try plan.importMerging([
+            try makeItem("n", title: "New"),
+            try makeItem("a", title: "Changed"),
+            try makeItem("n", title: "New again")
+        ])) { error in
+            XCTAssertEqual(error as? StudyPlanError, .duplicateID("n"))
+        }
+        XCTAssertEqual(plan, before)
+    }
+    
+    func testImportOfEmptyListChangesNothing() throws {
+        var plan = try StudyPlan(items: [try makeItem("a"), try makeItem("b")])
+        let before = plan
+        
+        try plan.importMerging([])
+        
+        XCTAssertEqual(plan, before)
+    }
 }
 

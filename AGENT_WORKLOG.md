@@ -166,3 +166,27 @@ failure. Then I put the code back.
 ### Artifact links
 
 The final test run is in `artifacts/swift-test-final.txt`.
+
+## Bonus importMerging
+
+### Tool/agent task
+
+I asked Claude Code to explain the bonus rules in simple words with an
+example, what "atomic" means, and how to implement `importMerging`.
+
+### Output reviewed
+
+An explanation with a before/after example, the suggested code that checks
+duplicates first and works on a copy, and three suggested tests.
+
+### Accepted/rejected/revised decision
+
+I accepted the code, but not tests, asked him to change them. Also he explained to me risk and I typed it in my Plan.
+
+### Verification command/result
+
+`swift test` -> 18 tests, 0 failures.
+
+### Artifact links
+
+The final test run is in `artifacts/swift-test-final.txt`.

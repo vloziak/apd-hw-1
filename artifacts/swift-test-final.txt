@@ -1,19 +1,18 @@
-[0/1] Planning build
 Building for debugging...
 [0/2] Write swift-version--1B3F06B94CC9E375.txt
-Build complete! (0.16s)
-Test Suite 'All tests' started at 2026-10-01 18:12:09.372.
-Test Suite 'StudyPlannerPackageTests.xctest' started at 2026-10-01 18:12:09.381.
-Test Suite 'StudyPlannerPublicTests' started at 2026-10-01 18:12:09.381.
+Build complete! (0.14s)
+Test Suite 'All tests' started at 2026-10-01 18:39:13.727.
+Test Suite 'StudyPlannerPackageTests.xctest' started at 2026-10-01 18:39:13.729.
+Test Suite 'StudyPlannerPublicTests' started at 2026-10-01 18:39:13.729.
 Test Case '-[StudyPlannerTests.StudyPlannerPublicTests testBlankTitleIsRejected]' started.
 Test Case '-[StudyPlannerTests.StudyPlannerPublicTests testBlankTitleIsRejected]' passed (0.002 seconds).
 Test Case '-[StudyPlannerTests.StudyPlannerPublicTests testIncompleteMinutesAndCompletion]' started.
 Test Case '-[StudyPlannerTests.StudyPlannerPublicTests testIncompleteMinutesAndCompletion]' passed (0.000 seconds).
 Test Case '-[StudyPlannerTests.StudyPlannerPublicTests testValidItemStoresValues]' started.
 Test Case '-[StudyPlannerTests.StudyPlannerPublicTests testValidItemStoresValues]' passed (0.000 seconds).
-Test Suite 'StudyPlannerPublicTests' passed at 2026-10-01 18:12:09.383.
-	 Executed 3 tests, with 0 failures (0 unexpected) in 0.002 (0.003) seconds
-Test Suite 'StudyPlannerVictoriaTests' started at 2026-10-01 18:12:09.383.
+Test Suite 'StudyPlannerPublicTests' passed at 2026-10-01 18:39:13.731.
+	 Executed 3 tests, with 0 failures (0 unexpected) in 0.002 (0.002) seconds
+Test Suite 'StudyPlannerVictoriaTests' started at 2026-10-01 18:39:13.731.
 Test Case '-[StudyPlannerTests.StudyPlannerVictoriaTests testDecodingFixtureArray]' started.
 Test Case '-[StudyPlannerTests.StudyPlannerVictoriaTests testDecodingFixtureArray]' passed (0.001 seconds).
 Test Case '-[StudyPlannerTests.StudyPlannerVictoriaTests testDecodingItemWithBlankTitleFails]' started.
@@ -22,6 +21,12 @@ Test Case '-[StudyPlannerTests.StudyPlannerVictoriaTests testDecodingKeyedPlanUs
 Test Case '-[StudyPlannerTests.StudyPlannerVictoriaTests testDecodingKeyedPlanUsesItemsKey]' passed (0.000 seconds).
 Test Case '-[StudyPlannerTests.StudyPlannerVictoriaTests testFirstDuplicateIDIsReported]' started.
 Test Case '-[StudyPlannerTests.StudyPlannerVictoriaTests testFirstDuplicateIDIsReported]' passed (0.000 seconds).
+Test Case '-[StudyPlannerTests.StudyPlannerVictoriaTests testImportOfEmptyListChangesNothing]' started.
+Test Case '-[StudyPlannerTests.StudyPlannerVictoriaTests testImportOfEmptyListChangesNothing]' passed (0.000 seconds).
+Test Case '-[StudyPlannerTests.StudyPlannerVictoriaTests testImportReplacesExistingInPlaceAndAppendsNewSortedByID]' started.
+Test Case '-[StudyPlannerTests.StudyPlannerVictoriaTests testImportReplacesExistingInPlaceAndAppendsNewSortedByID]' passed (0.000 seconds).
+Test Case '-[StudyPlannerTests.StudyPlannerVictoriaTests testImportWithDuplicateIncomingIDsThrowsAndKeepsPlan]' started.
+Test Case '-[StudyPlannerTests.StudyPlannerVictoriaTests testImportWithDuplicateIncomingIDsThrowsAndKeepsPlan]' passed (0.000 seconds).
 Test Case '-[StudyPlannerTests.StudyPlannerVictoriaTests testIncompleteMinutesIsZeroForEmptyPlan]' started.
 Test Case '-[StudyPlannerTests.StudyPlannerVictoriaTests testIncompleteMinutesIsZeroForEmptyPlan]' passed (0.000 seconds).
 Test Case '-[StudyPlannerTests.StudyPlannerVictoriaTests testItemsAreSortedByTitleThenID]' started.
@@ -38,12 +43,12 @@ Test Case '-[StudyPlannerTests.StudyPlannerVictoriaTests testTitleWithSurroundin
 Test Case '-[StudyPlannerTests.StudyPlannerVictoriaTests testTitleWithSurroundingSpacesIsKeptAsIs]' passed (0.000 seconds).
 Test Case '-[StudyPlannerTests.StudyPlannerVictoriaTests testZeroMinutesIsRejected]' started.
 Test Case '-[StudyPlannerTests.StudyPlannerVictoriaTests testZeroMinutesIsRejected]' passed (0.000 seconds).
-Test Suite 'StudyPlannerVictoriaTests' passed at 2026-10-01 18:12:09.385.
-	 Executed 12 tests, with 0 failures (0 unexpected) in 0.002 (0.002) seconds
-Test Suite 'StudyPlannerPackageTests.xctest' passed at 2026-10-01 18:12:09.385.
-	 Executed 15 tests, with 0 failures (0 unexpected) in 0.004 (0.005) seconds
-Test Suite 'All tests' passed at 2026-10-01 18:12:09.385.
-	 Executed 15 tests, with 0 failures (0 unexpected) in 0.004 (0.013) seconds
+Test Suite 'StudyPlannerVictoriaTests' passed at 2026-10-01 18:39:13.733.
+	 Executed 15 tests, with 0 failures (0 unexpected) in 0.002 (0.003) seconds
+Test Suite 'StudyPlannerPackageTests.xctest' passed at 2026-10-01 18:39:13.733.
+	 Executed 18 tests, with 0 failures (0 unexpected) in 0.004 (0.005) seconds
+Test Suite 'All tests' passed at 2026-10-01 18:39:13.733.
+	 Executed 18 tests, with 0 failures (0 unexpected) in 0.004 (0.006) seconds
 ◇ Test run started.
 ↳ Testing Library Version: 1902
 ↳ Target Platform: arm64e-apple-macos14.0

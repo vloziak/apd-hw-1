@@ -333,3 +333,96 @@ Test Suite 'All tests' passed at 2026-10-01 17:54:10.561.
 ✔ Test run with 0 tests in 0 suites passed after 0.001 seconds.
 ```
 All tests passes.
+
+## Bonus Task importMerging
+
+The bonus works when importing a list that has the same id twice throws
+`duplicateID` with first repeated id, and plan stays exactly as it
+was. If an imported item has an id that is already in the plan, it replaces
+the old item at the same position. Items with new ids are added at the end,
+sorted by id from smallest to largest. If the import fails, nothing in the
+plan changes at all.
+
+### Implementation steps
+
+I worked only in `importMerging` inside
+`Sources/StudyPlanner/StudyPlanner.swift`. First I check the incoming items
+for duplicate ids with a `Set`, the same way as in Task 3, before I touch
+anything. Then I make a copy of the current items and an empty list for new
+ones. For each imported item I look for its id in the copy with `firstIndex`.
+If I find it, I put the new item at that index, and if not, I add it to the
+list of new items. After the loop I sort the new items by id and append them
+to the copy. Only at the very end I do save the copy into `items`.
+
+### Risks
+
+To keep the import atomic, all checks happen before any change, and I change
+only a copy until the last line. The bonus rules say "at their current
+positions" and "append", so after an import the plan may no longer be sorted
+by title like in Task 3. When an item is replaced, the whole item is replaced, including `isCompleted`, so a completed
+item can become not completed again if the imported version says so. I don't
+validate titles and minutes here, because every `StudyItem` is already
+checked when it is created.
+
+### `swift test` verification
+
+I ran
+```
+victorialozak@MacBook-Pro-Viktoria apd-hw-1 % swift test
+Building for debugging...
+[9/9] Linking StudyPlannerPackageTests
+Build complete! (1.97s)
+Test Suite 'All tests' started at 2026-10-01 18:32:40.871.
+Test Suite 'StudyPlannerPackageTests.xctest' started at 2026-10-01 18:32:40.877.
+Test Suite 'StudyPlannerPublicTests' started at 2026-10-01 18:32:40.877.
+Test Case '-[StudyPlannerTests.StudyPlannerPublicTests testBlankTitleIsRejected]' started.
+Test Case '-[StudyPlannerTests.StudyPlannerPublicTests testBlankTitleIsRejected]' passed (0.003 seconds).
+Test Case '-[StudyPlannerTests.StudyPlannerPublicTests testIncompleteMinutesAndCompletion]' started.
+Test Case '-[StudyPlannerTests.StudyPlannerPublicTests testIncompleteMinutesAndCompletion]' passed (0.000 seconds).
+Test Case '-[StudyPlannerTests.StudyPlannerPublicTests testValidItemStoresValues]' started.
+Test Case '-[StudyPlannerTests.StudyPlannerPublicTests testValidItemStoresValues]' passed (0.000 seconds).
+Test Suite 'StudyPlannerPublicTests' passed at 2026-10-01 18:32:40.880.
+     Executed 3 tests, with 0 failures (0 unexpected) in 0.003 (0.003) seconds
+Test Suite 'StudyPlannerVictoriaTests' started at 2026-10-01 18:32:40.880.
+Test Case '-[StudyPlannerTests.StudyPlannerVictoriaTests testDecodingFixtureArray]' started.
+Test Case '-[StudyPlannerTests.StudyPlannerVictoriaTests testDecodingFixtureArray]' passed (0.001 seconds).
+Test Case '-[StudyPlannerTests.StudyPlannerVictoriaTests testDecodingItemWithBlankTitleFails]' started.
+Test Case '-[StudyPlannerTests.StudyPlannerVictoriaTests testDecodingItemWithBlankTitleFails]' passed (0.000 seconds).
+Test Case '-[StudyPlannerTests.StudyPlannerVictoriaTests testDecodingKeyedPlanUsesItemsKey]' started.
+Test Case '-[StudyPlannerTests.StudyPlannerVictoriaTests testDecodingKeyedPlanUsesItemsKey]' passed (0.000 seconds).
+Test Case '-[StudyPlannerTests.StudyPlannerVictoriaTests testFirstDuplicateIDIsReported]' started.
+Test Case '-[StudyPlannerTests.StudyPlannerVictoriaTests testFirstDuplicateIDIsReported]' passed (0.000 seconds).
+Test Case '-[StudyPlannerTests.StudyPlannerVictoriaTests testImportOfEmptyListChangesNothing]' started.
+Test Case '-[StudyPlannerTests.StudyPlannerVictoriaTests testImportOfEmptyListChangesNothing]' passed (0.000 seconds).
+Test Case '-[StudyPlannerTests.StudyPlannerVictoriaTests testImportReplacesExistingInPlaceAndAppendsNewSortedByID]' started.
+Test Case '-[StudyPlannerTests.StudyPlannerVictoriaTests testImportReplacesExistingInPlaceAndAppendsNewSortedByID]' passed (0.000 seconds).
+Test Case '-[StudyPlannerTests.StudyPlannerVictoriaTests testImportWithDuplicateIncomingIDsThrowsAndKeepsPlan]' started.
+Test Case '-[StudyPlannerTests.StudyPlannerVictoriaTests testImportWithDuplicateIncomingIDsThrowsAndKeepsPlan]' passed (0.000 seconds).
+Test Case '-[StudyPlannerTests.StudyPlannerVictoriaTests testIncompleteMinutesIsZeroForEmptyPlan]' started.
+Test Case '-[StudyPlannerTests.StudyPlannerVictoriaTests testIncompleteMinutesIsZeroForEmptyPlan]' passed (0.000 seconds).
+Test Case '-[StudyPlannerTests.StudyPlannerVictoriaTests testItemsAreSortedByTitleThenID]' started.
+Test Case '-[StudyPlannerTests.StudyPlannerVictoriaTests testItemsAreSortedByTitleThenID]' passed (0.000 seconds).
+Test Case '-[StudyPlannerTests.StudyPlannerVictoriaTests testItemsInCategoryReturnsOnlyThatCategory]' started.
+Test Case '-[StudyPlannerTests.StudyPlannerVictoriaTests testItemsInCategoryReturnsOnlyThatCategory]' passed (0.000 seconds).
+Test Case '-[StudyPlannerTests.StudyPlannerVictoriaTests testMarkCompletedIsIdempotent]' started.
+Test Case '-[StudyPlannerTests.StudyPlannerVictoriaTests testMarkCompletedIsIdempotent]' passed (0.000 seconds).
+Test Case '-[StudyPlannerTests.StudyPlannerVictoriaTests testMarkCompletedWithUnknownIDThrowsAndKeepsPlan]' started.
+Test Case '-[StudyPlannerTests.StudyPlannerVictoriaTests testMarkCompletedWithUnknownIDThrowsAndKeepsPlan]' passed (0.000 seconds).
+Test Case '-[StudyPlannerTests.StudyPlannerVictoriaTests testTitleErrorTakesPrecedenceOverMinutes]' started.
+Test Case '-[StudyPlannerTests.StudyPlannerVictoriaTests testTitleErrorTakesPrecedenceOverMinutes]' passed (0.000 seconds).
+Test Case '-[StudyPlannerTests.StudyPlannerVictoriaTests testTitleWithSurroundingSpacesIsKeptAsIs]' started.
+Test Case '-[StudyPlannerTests.StudyPlannerVictoriaTests testTitleWithSurroundingSpacesIsKeptAsIs]' passed (0.000 seconds).
+Test Case '-[StudyPlannerTests.StudyPlannerVictoriaTests testZeroMinutesIsRejected]' started.
+Test Case '-[StudyPlannerTests.StudyPlannerVictoriaTests testZeroMinutesIsRejected]' passed (0.000 seconds).
+Test Suite 'StudyPlannerVictoriaTests' passed at 2026-10-01 18:32:40.882.
+     Executed 15 tests, with 0 failures (0 unexpected) in 0.002 (0.002) seconds
+Test Suite 'StudyPlannerPackageTests.xctest' passed at 2026-10-01 18:32:40.882.
+     Executed 18 tests, with 0 failures (0 unexpected) in 0.005 (0.005) seconds
+Test Suite 'All tests' passed at 2026-10-01 18:32:40.882.
+     Executed 18 tests, with 0 failures (0 unexpected) in 0.005 (0.011) seconds
+◇ Test run started.
+↳ Testing Library Version: 1902
+↳ Target Platform: arm64e-apple-macos14.0
+✔ Test run with 0 tests in 0 suites passed after 0.001 seconds.
+```
+All tests passes.
